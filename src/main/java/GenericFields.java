@@ -55,12 +55,12 @@ public class GenericFields {
             String alias = ks.aliases().nextElement();
             PrivateKey pk = (PrivateKey) ks.getKey(alias, PASSWORD);
             Certificate[] chain = ks.getCertificateChain(alias);
-            sign(SRC, String.format(DEST, 1), chain, pk, DigestAlgorithms.SHA256,
-                    provider.getName(), MakeSignature.CryptoStandard.CMS, "Test 1", "Ghent", "signHere", ks);
-            sign(SRC, String.format(DEST, 2), chain, pk, DigestAlgorithms.SHA512,
-                    provider.getName(), MakeSignature.CryptoStandard.CMS, "Test 2", "Ghent", "signHere", ks);
-            sign(SRC, String.format(DEST, 3), chain, pk, DigestAlgorithms.SHA256,
-                    provider.getName(), MakeSignature.CryptoStandard.CADES, "Test 3", "Ghent", "signHere", ks);
+            sign(SRC, String.format(DEST, 1), chain, pk, DigestAlgorithms.SHA1,
+                    provider.getName(), MakeSignature.CryptoStandard.CMS, "GRAZIANO CARLOS MARIANO", "Buenos Aires", "signHere", ks);
+            //sign(SRC, String.format(DEST, 2), chain, pk, DigestAlgorithms.SHA512,
+               //     provider.getName(), MakeSignature.CryptoStandard.CMS, "CORPTYS033", "Buenos Aires", "signHere", ks);
+            //sign(SRC, String.format(DEST, 3), chain, pk, DigestAlgorithms.SHA256,
+              //      provider.getName(), MakeSignature.CryptoStandard.CADES, "CORPTYS033", "Buenos Aires", "signHere", ks);
             //sign(SRC, String.format(DEST, 4), chain, pk, DigestAlgorithms.RIPEMD160,
                //     provider.getName(), MakeSignature.CryptoStandard.CADES, "Test 4", "Ghent", "signHere", ks);
         } catch (KeyStoreException e) {
@@ -127,7 +127,7 @@ public class GenericFields {
         //appearance.setImageScale(-1);
 
         // Creating the signature
-        ExternalDigest digest = new ProviderDigest(provider);
+        ExternalDigest digest = new BouncyCastleDigest();
 
         ExternalSignature signature = new PrivateKeySignature(pk, digestAlgorithm, ks.getProvider().getName());
 
